@@ -21,11 +21,11 @@ ___
 # 개발동기
 
 가정에 많은 약
-어머니의 처방전의 주의사항
+어머니 처방전의 주의사항
 적합성 테스트
 복용관리
 
-![bg vertical h:80% w:70% right:60% 100%](../images/%EC%95%BD%EB%B4%89%ED%88%AC.jpg)
+![bg vertical h:80% w:70% right:50% 100%](../images/%EC%95%BD%EB%B4%89%ED%88%AC.jpg)
 ![bg h:80% w:70% 100% ](../images/%EC%95%BD%EB%B0%95%EC%8A%A4.jpg)
 ___
 
