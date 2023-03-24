@@ -4,18 +4,18 @@ MongoDB: {
 
   User: {
     shape: sql_table
-    Id: string {constraint: foreign_key}
-    Pregnancy: bool
-    BloodPressure: int
-    IsDiabetes: bool
+    id: string {constraint: foreign_key}
+    is_pregnancy: bool
+    blood_pressure: int
+    is_diabetes: bool
   }
 
-  PillHistory: {
+  pill_history: {
     shape: sql_table
-    User: uuid {constraint: foreign_key}
-    PillName: string {constraint: foreign_key}
-    StartDate: Date
-    EndDate: Date
+    user_id: uuid {constraint: foreign_key}
+    pill_name: string {constraint: foreign_key}
+    start_date: Date
+    end_date: Date
   }
 }
 
@@ -24,48 +24,49 @@ Postgresql: {
 
   User: {
     shape: sql_table
-    Id: uuid {constraint: primary_key}
-    Name: string
-    EMail: string
-    Sex: int
-    BirthDate: Date
+    id: uuid {constraint: primary_key}
+    name: string
+    e_mail: string
+    sex: int
+    birth_date: Date
   }
 
-  Pill: {
+  pill_info: {
     shape: sql_table
-    ItemSeq: string {constraint: primary_key}
-    Name: string
-    Effect: string
-    WarningMessage: string
-    UseMethod: string
-    TabooCase: array
+    item_seq: int {constraint: primary_key}
+    name: string
+    effect: string
+    warning_message: string
+    use_method: string
+    taboo_case: array
   }
 
-  MixTaboo: {
+  mix_taboo: {
     shape: sql_table
-    PillA: string {constraint: foreign_key}
-    PillB: string {constraint: foreign_key}
+    item_seq: int {constraint: foreign_key}
+    mixture_item_seq: int {constraint: foreign_key}
+    prohibited_content: string
   }
 
-  Pill.Name -> MixTaboo.PillA
-  Pill.Name -> MixTaboo.PillB
+  pill_info.item_seq -> mix_taboo.item_seq
+  pill_info.item_seq -> mix_taboo.mixture_item_seq
 }
 
 User: |md
   # Id
    UUID
-  # BloodPressure 
+  # blood_pressure 
   * 고
   * 저 
-  # Pregnancy
+  # pregnancy
   임신부, 수유부를 모두 해당되는 항목 수정시 경고문구 띄울것
-  # IsDiabetes
+  # is_diabetes
   당뇨여부
 |
-Pill: |md
-  # ItemSeq
+pill: |md
+  # item_seq
   품목표준코드 (9자리 숫자코드)
-  # TabooCase
+  # taboo_case
   복용하지 말아야할 몸상태 기재
   * 노약자 (65세 이상)
   * 어린이 (18세 미만)
@@ -74,6 +75,6 @@ Pill: |md
   * 당뇨
 |
 
-Postgresql.User.Id -> MongoDB.User.Id: {style: {stroke-dash: 2}}
-Postgresql.User.Id -> MongoDB.PillHistory.User: {style: {stroke-dash: 2}}
-Postgresql.Pill.Name -> MongoDB.PillHistory.PillName
+Postgresql.User.id -> MongoDB.User.id: {style: {stroke-dash: 2}}
+Postgresql.User.id -> MongoDB.pill_history.user_id: {style: {stroke-dash: 2}}
+Postgresql.pill_info.name -> MongoDB.pill_history.pill_name
